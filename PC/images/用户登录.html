@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<!-- saved from url=(0086)file:///G:/360MoveData/Users/Administrator/Desktop/%E5%9C%9F%E6%9C%A8/9star/login.html -->
+<html><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>用户登录</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="alternate icon" type="image/png" href="file:///G:/360MoveData/Users/Administrator/Desktop/%E5%9C%9F%E6%9C%A8/9star/assets/i/favicon.png">
+  <link rel="stylesheet" href="file:///G:/360MoveData/Users/Administrator/Desktop/%E5%9C%9F%E6%9C%A8/9star/assets/css/amazeui.min.css">
+  <link rel="stylesheet" href="file:///G:/360MoveData/Users/Administrator/Desktop/%E5%9C%9F%E6%9C%A8/9star/assets/css/app.css">
+  <link rel="stylesheet" href="file:///G:/360MoveData/Users/Administrator/Desktop/%E5%9C%9F%E6%9C%A8/9star/assets/css/login.css">
+</head>
+
+<body>
+  <div class="header">
+    <div class="am-g">
+      <h1><img src="file:///G:/360MoveData/Users/Administrator/Desktop/%E5%9C%9F%E6%9C%A8/9star/assets/i/pai.png" alt=""></h1>
+    </div>
+    <div class="canvaszz"> </div>
+    <canvas id="canvas" width="375" height="812"></canvas>
+    <!-- <hr> -->
+  </div>
+  <div class="am-g amg_l">
+    <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+      <h3>
+        <center>派派新零售</center>
+      </h3>
+      <form method="post" class="am-form">
+        <p>登录</p>
+        <div class="am-g">
+          <div class="am-u-lg-6">
+            <div class="am-input-group">
+              <span class="am-input-group-label"><i class="am-icon-user am-icon-fw"></i></span>
+              <input style="  background-color: transparent;
+              border: none;color: #fff" class="input_wrap" type="text" placeholder="请输入电话号码">
+            </div>
+          </div>
+          <br><br>
+
+          <div class="am-u-lg-6">
+            <div class="am-input-group">
+              <span class="am-input-group-label"><i class="am-icon-lock am-icon-fw"></i></span>
+              <input style="background-color: transparent;
+              border: none; color: #fff;" type="password" class="am-form-field" placeholder="请输入新密码">
+            </div>
+          </div>
+
+        </div>
+        <br>
+        <div class="am-cf">
+          <input type="submit" name="" value="登录" class="am-btn am-btn-primary am-btn-sm am-fl login_btn am-active">
+          <a href="file:///G:/360MoveData/Users/Administrator/Desktop/%E5%9C%9F%E6%9C%A8/9star/find_pwd.html">
+            <input type="button" name="" value="找回密码" class="am-btn am-btn-link am-btn-sm am-fr am-active"></a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="file:///G:/360MoveData/Users/Administrator/Desktop/%E5%9C%9F%E6%9C%A8/9star/assets/js/jquery-3.4.0.min.js"></script>  
+  <script>
+    //宇宙特效
+    "use strict";
+    var canvas = document.getElementById('canvas'),
+      ctx = canvas.getContext('2d'),
+      w = canvas.width = window.innerWidth,
+      h = canvas.height = window.innerHeight,
+
+      hue = 217,
+      stars = [],
+      count = 0,
+      maxStars = 1300;//星星数量
+
+    var canvas2 = document.createElement('canvas'),
+      ctx2 = canvas2.getContext('2d');
+    canvas2.width = 100;
+    canvas2.height = 100;
+    var half = canvas2.width / 2,
+      gradient2 = ctx2.createRadialGradient(half, half, 0, half, half, half);
+    gradient2.addColorStop(0.025, '#CCC');
+    gradient2.addColorStop(0.1, 'hsl(' + hue + ', 61%, 33%)');
+    gradient2.addColorStop(0.25, 'hsl(' + hue + ', 64%, 6%)');
+    gradient2.addColorStop(1, 'transparent');
+
+    ctx2.fillStyle = gradient2;
+    ctx2.beginPath();
+    ctx2.arc(half, half, half, 0, Math.PI * 2);
+    ctx2.fill();
+
+    // End cache
+
+    function random(min, max) {
+      if (arguments.length < 2) {
+        max = min;
+        min = 0;
+      }
+
+      if (min > max) {
+        var hold = max;
+        max = min;
+        min = hold;
+      }
+
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function maxOrbit(x, y) {
+      var max = Math.max(x, y),
+        diameter = Math.round(Math.sqrt(max * max + max * max));
+      return diameter / 2;
+      //星星移动范围，值越大范围越小，
+    }
+
+    var Star = function () {
+
+      this.orbitRadius = random(maxOrbit(w, h));
+      this.radius = random(60, this.orbitRadius) / 8;
+      //星星大小
+      this.orbitX = w / 2;
+      this.orbitY = h / 2;
+      this.timePassed = random(0, maxStars);
+      this.speed = random(this.orbitRadius) / 50000;
+      //星星移动速度
+      this.alpha = random(2, 10) / 10;
+
+      count++;
+      stars[count] = this;
+    }
+
+    Star.prototype.draw = function () {
+      var x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX,
+        y = Math.cos(this.timePassed) * this.orbitRadius + this.orbitY,
+        twinkle = random(10);
+
+      if (twinkle === 1 && this.alpha > 0) {
+        this.alpha -= 0.05;
+      } else if (twinkle === 2 && this.alpha < 1) {
+        this.alpha += 0.05;
+      }
+
+      ctx.globalAlpha = this.alpha;
+      ctx.drawImage(canvas2, x - this.radius / 2, y - this.radius / 2, this.radius, this.radius);
+      this.timePassed += this.speed;
+    }
+
+    for (var i = 0; i < maxStars; i++) {
+      new Star();
+    }
+
+    function animation() {
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.globalAlpha = 0.5; //尾巴
+      ctx.fillStyle = 'hsla(' + hue + ', 64%, 6%, 2)';
+      ctx.fillRect(0, 0, w, h)
+
+      ctx.globalCompositeOperation = 'lighter';
+      for (var i = 1, l = stars.length; i < l; i++) {
+        stars[i].draw();
+      };
+
+      window.requestAnimationFrame(animation);
+    }
+
+    animation();
+  </script>
+
+
+</body></html>

@@ -1,0 +1,109 @@
+/* 头部top部分 */
+.top_fix{
+    height: 62px;
+    position: fixed;
+    width: 100%;
+    z-index: 99999;
+    top: 0;
+}
+
+.top_nav{
+    min-width: 1250px;
+    width: 100%;
+}
+
+.top_center{
+    height: 65px;
+    background-color: black;
+}
+
+.top_content{
+    width: 1200px;
+    height: 52px;
+    margin: 0 auto;
+}
+
+.logo_left{
+    margin-left: 7px;
+    /* margin-top: 11px; */
+    float: left;
+    margin-top: 10px;
+
+}
+
+.logo_left a{
+    color: #08c;
+}
+
+.logo_left a img{
+    border: 0;
+}
+
+.top_nav_menu{
+    height: 100%;
+
+}
+
+.top_nav_menu ul{
+    list-style: none;
+}
+
+.top_nav_menu ul>li{
+    float: left;
+    margin-top: 16px;
+    font-size: 14px;
+    width: 115px;
+    height: 38.4px;
+    text-align: center;
+}
+
+.top_nav_menu ul li>a{
+    color: white;
+    font-size: 16px;
+}
+
+.top_nav_menu .top_nav_menu_a{
+    display:block;
+    width: 114px;
+    height: 37.6;
+}
+
+.top_nav_menu ul li a p{
+    font-size: 12px;
+    font-family: Verdana;
+    color: #938d8b;
+    transform: scale(.75);
+    -webkit-transform: scale(.75);  
+    margin-top: 4px;
+    width: 114px;
+}
+
+/* 导航栏高亮 */
+.top_nav_menu>ul>li>.active{
+    color: #ff0101;
+}
+
+.top_nav_menu ul li a p.active{
+    color: #fff;
+}
+
+/* 鼠标悬停 */
+.top_nav_menu ul li a:hover{
+    color: #ff0101;
+    transition: color .5s ease
+}
+
+.top_nav_menu ul li p:hover{
+    color: #fff;
+    transition: color .5s ease
+}
+
+.top_nav_menu ul li:hover .top_nav_menu ul li a>p{
+    color: #fff;
+    transition: color .5s ease
+}
+
+.top_ul_li{
+    color: #ff0101;
+    transition: color .5s ease
+}
